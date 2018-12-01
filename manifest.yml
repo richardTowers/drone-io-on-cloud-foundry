@@ -1,0 +1,19 @@
+---
+applications:
+- name: drone
+  docker:
+    image: drone/drone:1.0.0-rc.1
+  health-check-type: process # For some reason I can't get the http healthcheck to work...
+  env:
+    DRONE_GITHUB_SERVER: https://github.com
+    DRONE_GITHUB_CLIENT_ID: ((DRONE_GITHUB_CLIENT_ID))
+    DRONE_GITHUB_CLIENT_SECRET: ((DRONE_GITHUB_CLIENT_SECRET))
+    DRONE_RUNNER_CAPACITY: 0
+    DRONE_SERVER_HOST: drone.london.cloudapps.digital
+    DRONE_SERVER_PROTO: https
+    DRONE_RPC_SECRET: ((DRONE_RPC_SECRET))
+    DRONE_DATABASE_DRIVER: postgres
+    # DRONE_DATABASE_DATASOURCE needs to be set manually once the app is bound
+  services:
+  - drone-db # This should be an instance of postgres
+
