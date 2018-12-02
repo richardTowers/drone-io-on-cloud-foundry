@@ -2,6 +2,8 @@
 
 set -e -u -o pipefail
 
+cd "$(dirname "$0")/.."
+
 cf push --no-start --vars-file .cf-vars.yml
 
 app_guid=$(cf app drone --guid)
